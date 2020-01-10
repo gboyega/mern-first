@@ -24,8 +24,8 @@ app.get("/api/", (req, res) => {
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
+    res.sendFile(path.join(__dirname, '/cli'))
+})
 
 
 app.listen(process.env.PORT || 4000, () => console.log('APP listening on 4000'));

@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require('dotenv').config();
-const path = require ('path');
 const app = express();
+
+app.get('/api/', (req, res) => {
+  res.json({hello: 'world'});
+});
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
@@ -13,19 +16,8 @@ mongoose.connect(process.env.DB_URL, {
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-    console.log("MongoDB database connection established!");
-});
+db.once('open', () =)
 
-app.get("/api/", (req, res) => {
-  res.json({ hello: "world" });
-});
-
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
 
 
 app.listen(process.env.PORT || 4000, () => console.log('APP listening on 4000'));
